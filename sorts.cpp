@@ -1,5 +1,6 @@
 #include "sorts.h"
 #include "work_array.h"
+#include "cstring"
 
 void BubbleSort(int* ar,int size){
 	for (int i=0;i<size; i++){
@@ -58,4 +59,37 @@ void InsertionSort(int* ar, int size) {
         ar[i + 1] = key;
     }
 
+}
+
+static void merge(int* ar,int left,int size){
+	int l =0;
+	int r = left;
+	int i=0;
+	int* res = new int [size];
+	while(i<size){
+		if(ar[l]>=ar[r]){
+			res[i]=ar[r];
+			i++;
+			r++;
+			if(r>=size){
+				while(l<left){
+					res[i++]=ar[l++];
+				}
+				break;
+			}
+		}
+		if(ar[l]<ar[r]){
+			res[i]=ar[l];
+			l++;
+			i++;
+			if(l>=left){
+				while(r<size){
+					res[i++]=ar[r++];
+				}
+				break;
+			}
+		}
+	}
+	memcpy(ar,res,size*4);
+	delete [] res;
 }

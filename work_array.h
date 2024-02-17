@@ -5,4 +5,5 @@ void Swap(int* , int*);
 int GetMin(const int*,int);
 int GetMax(const int*,int);
 void ShowAr(const int*,int,char);
+int CheckSorts(const int*, int);
 #endif

@@ -10,4 +10,5 @@ void SelectionSort(int*,int);
 void InsertionSort(int*,int);
 void BubbleSort(int*,int);
 void QuickSort(int*,int);
+int CheakSorts(const int*, int);
 #endif
