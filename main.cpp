@@ -1,27 +1,31 @@
 #include <iostream>
 #include "sorts.h"
 #include "work_array.h"
+#include <chrono>
+
+
 using namespace std;
 int main() {
-	const int size = 10;
-	int arr[size] = {-1,-100,-100,-200,500,1000,1001,0,1,100};
-	ShowAr(arr,size, ' ');
-	cout<<CheckSorts(arr,size)<<endl;	
-	QuickSort(arr,size);
-	ShowAr(arr,size, ' ');
-	cout<<CheckSorts(arr,size)<<endl;	
-	
-	SelectionSort(arr,size);
-	ShowAr(arr,size, ' ');
-	cout<<CheckSorts(arr,size)<<endl;	
+		int c = 10;
+		int sizes[c] = {100, 500, 1000, 2500, 5000, 10000, 50000, 100000, 500000, 1000000};
+		for(int i = 0; i <c;i++){
+			int size = sizes[i];
+			int* arr = new int[size];
+			for(int j;j<size; ++j){
+				arr[j]=rand()%100;
+			}
 
-	InsertionSort(arr,size);
-	ShowAr(arr,size, ' ');
-	cout<<CheckSorts(arr,size)<<endl;	
 
-	BubbleSort(arr,size);
-	ShowAr(arr,size, ' ');
-	cout<<CheckSorts(arr,size)<<endl;	
+
+
+			auto start = std::chrono::steady_clock::now();
+			BubbleSort(arr,size);
+			auto end = std::chrono::steady_clock::now();
+			long int time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+        std::cout<<size<<'\t'<<time<<'\n';
+			delete [] arr;
+}
+
 
 
  
