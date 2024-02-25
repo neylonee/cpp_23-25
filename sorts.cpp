@@ -93,3 +93,11 @@ static void merge(int* ar,int left,int size){
 	memcpy(ar,res,size*4);
 	delete [] res;
 }
+void MergeSort(int*ar,int size){
+	if(size<=1){
+		return;
+	}
+	MergeSort(&ar[0],size/2);
+	MergeSort(&ar[size/2],size - size/2);
+	merge(&ar[0],size/2,size);
+}

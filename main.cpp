@@ -6,7 +6,12 @@
 
 using namespace std;
 int main() {
+		
 		int c = 10;
+		
+ 		int arr[c] = {5,10,100,-100,10,8,15,20,25,999};
+		MergeSort(arr,c);
+		ShowAr(arr,c,' ');
 		int sizes[c] = {100, 500, 1000, 2500, 5000, 10000, 50000, 100000, 500000, 1000000};
 		for(int i = 0; i <c;i++){
 			int size = sizes[i];
@@ -28,5 +33,4 @@ int main() {
 
 
 
- 
 }
