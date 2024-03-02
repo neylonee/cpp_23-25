@@ -12,5 +12,6 @@ void BubbleSort(int*,int);
 void QuickSort(int*,int);
 int CheakSorts(const int*, int);
 void MergeSort(int*,int);
+void  CountSort(int*,int);
 static void merge(int*,int);
 #endif

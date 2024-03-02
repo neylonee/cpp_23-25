@@ -101,3 +101,17 @@ void MergeSort(int*ar,int size){
 	MergeSort(&ar[size/2],size - size/2);
 	merge(&ar[0],size/2,size);
 }
+
+void CountSort(int* ar, int size){
+		long int count[1024];
+		memset(count,0,sizeof(long int)*1024);
+		for(int i=0; i<size;i++){
+				++count[ar[i]];
+		}				
+		int c = 0;
+		for(int k =0;k<1024;k++){
+				for(int j = 0;j<count[k];j++){
+						ar[c++] = k;
+				}
+		}
+}
