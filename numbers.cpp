@@ -15,6 +15,8 @@ char* ConvertNumberToStr(int number){
         }
     reverse(s.begin(),s.end());
     char* ch = s.data();
+    cout<<ch<<'\n';
+    cout<<endl;
     return ch;
 }
 

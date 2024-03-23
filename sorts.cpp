@@ -1,7 +1,7 @@
 #include "sorts.h"
 #include "work_array.h"
 #include "cstring"
-
+void (*all_sorts[6])(int*,int) = {BubbleSort, InsertionSort,SelectionSort, QuickSort, MergeSort};
 void BubbleSort(int* ar,int size){
 	for (int i=0;i<size; i++){
 		for(int j=0;j<size-1-i;j++){
