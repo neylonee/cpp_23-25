@@ -55,4 +55,5 @@ int main(){
     remove(&s1,10);
     remove(&s1, 3);
     print(&s1);
+    s1.~Structure();
 }
