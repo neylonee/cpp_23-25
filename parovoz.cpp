@@ -62,28 +62,33 @@ struct Train {
         if(head == nullptr){
             return 0;
         }
-
-        int count = 0;
-        Wagon* current = head;
-        bool corelight = !current->lampOn; 
+        Wagon* temp = head;
+        unsigned int count = 0;
+        if(temp->lampOn == 0){
+            toggleLamp(temp);
+        }
 
         while(true){
-            current = current->next;
-            if(current->lampOn != corelight){
-                toggleLamp(current);
-            }
-            if(head->lampOn == corelight){
-                head->lampOn = !corelight;
-                break; 
-                
-            }
-        } 
-        Wagon* temp = head->next;
-        while(temp->lampOn != !corelight){
-            count+=1;
             temp = temp->next;
-        }
-        return count;
+            count++;
+            while(temp->lampOn == 0){
+                temp = temp->next;
+                count++;
+            }
+            unsigned int precount = count;
+            toggleLamp(temp);
+            while(count != 0){
+                count--;
+                temp = temp->prev;
+            }
+            if(temp->lampOn == 0){
+                return precount -1;
+            }
+            else{
+                precount = 0;
+                continue;
+            }
+    }
     }
 };
 
@@ -95,7 +100,6 @@ int main() {
     std::cout<<"Number of wagons - "<<numWagons<<std::endl;
     std::cout << "Func says: " << train.countWagons() << std::endl;
     train.print();
-
     
     return 0;
 }
