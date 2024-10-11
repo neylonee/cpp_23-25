@@ -8,7 +8,7 @@ struct Wagon {
     
     Wagon(){
 
-        lampOn = (rand()%2) & (1<<0);
+        lampOn = 1;
         next = nullptr;
         prev = nullptr;
     }
@@ -94,19 +94,17 @@ struct Train {
 };
 
 int main() {
-    for(int i = 0; i<10000; i+=100){
     Train* temp;
-    for(int i = 0; i < 10000; i+=100){
+    for(int i = 0; i < 100000000; i+=10000){
         temp = new Train(i);
         auto start_time = std::chrono::steady_clock::now();
         std::cout<<"Real num wagons: "<<i<<std::endl;
         std::cout<<"Func says: "<<temp->countWagons()<<std::endl;
         auto end_time = std::chrono::steady_clock::now();
-        auto elapsed_ns = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-        std::cout << elapsed_ns.count()<<" ms\n";
+        auto elapsed_ns = std::chrono::duration_cast<std::chrono::seconds>(end_time - start_time);
+        std::cout << elapsed_ns.count()<<" s\n";
         delete temp;
 
-    }
     }
     return 0;
 }
