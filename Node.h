@@ -4,4 +4,5 @@ struct Wagon{
     Wagon* next;
     Wagon* prev;
     Wagon();
+    ~Wagon();
 };

@@ -17,15 +17,13 @@ Train::Train(int numWagons) {
 }
 
 Train::~Train() {
-    if (head != nullptr) {
-        Wagon* current = head->next;
-        while (current != head) {
-            Wagon* temp = current;
-            current = current->next;
-            delete temp;
-        }
-        delete head;
+    Wagon* temp = head;
+    temp = temp->next;
+    while(temp!=head){
+        temp = temp->next;
+        delete temp->prev;
     }
+    delete head;
 }
 
 int Train::print(){

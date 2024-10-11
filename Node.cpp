@@ -6,4 +6,9 @@ Wagon::Wagon() {
     next = nullptr;
     prev = nullptr;
 }
+Wagon::~Wagon(){
+    if(next!=nullptr){
+        delete next;
+    }
+}
 
