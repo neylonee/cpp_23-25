@@ -1,5 +1,6 @@
 #include <iostream>
 #include <time.h>
+#include <chrono>
 struct Wagon {
     bool lampOn;
     Wagon* next;
@@ -93,14 +94,20 @@ struct Train {
 };
 
 int main() {
-    srand(time(nullptr));
-    int numWagons = std::rand() % 30;
-    Train train(numWagons);
-    train.print();
-    std::cout<<"Number of wagons - "<<numWagons<<std::endl;
-    std::cout << "Func says: " << train.countWagons() << std::endl;
-    train.print();
-    
+    for(int i = 0; i<10000; i+=100){
+    Train* temp;
+    for(int i = 0; i < 10000; i+=100){
+        temp = new Train(i);
+        auto start_time = std::chrono::steady_clock::now();
+        std::cout<<"Real num wagons: "<<i<<std::endl;
+        std::cout<<"Func says: "<<temp->countWagons()<<std::endl;
+        auto end_time = std::chrono::steady_clock::now();
+        auto elapsed_ns = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+        std::cout << elapsed_ns.count()<<" ms\n";
+        delete temp;
+
+    }
+    }
     return 0;
 }
 //создание структуры

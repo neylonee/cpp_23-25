@@ -7,7 +7,7 @@ Wagon::Wagon() {
     prev = nullptr;
 }
 Wagon::~Wagon(){
-    if(next!=nullptr){
+    while(next != nullptr){
         delete next;
     }
 }
