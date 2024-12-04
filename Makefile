@@ -1,2 +1,2 @@
 all:
-	g++ Train.cpp Node.cpp Main.cpp
+	g++ Train.cpp Node.cpp Main.cpp Dilatation.cpp
