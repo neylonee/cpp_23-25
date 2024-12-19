@@ -1,26 +1,28 @@
 #pragma once
 #include <iostream>
+#include <fstream>
+#include <string>
 struct IMG{
-    int *img_pixels;
+    char *img_pixels;
+    char *mask_pixels;
     unsigned int width;
     unsigned int height;
-    unsigned int _x_core;
-    unsigned int _y_core;
-    IMG(int x_core, int y_core);
+    unsigned int x_core;
+    unsigned int y_core;
+    unsigned int core_width;
+    unsigned int core_height;
     IMG();
-    IMG(const char*);
+    IMG(std::string filename);
     ~IMG(){
         delete [] img_pixels;
     }
 };
 class ImgProc{
     private:
-        IMG mask(1,1);
         IMG img[2];
         int curImg{0};
-        void showImg(int img_num);
         void clearUpdatedImg();
-        void copyMask(int x_core, int y_core);
+        void showImg(int img_num);
     public:
         ImgProc() {
             int t = 0;
@@ -30,9 +32,6 @@ class ImgProc{
 
         }
         ~ImgProc(){}
-
-        void setImg(const std::string&);
         void dilataion();
-        void saveImg(const std::string&);
         void update();
 };

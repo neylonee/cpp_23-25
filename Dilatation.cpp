@@ -1,51 +1,55 @@
 #include "Dilatation.h"
 #include <iostream>
 #include <fstream>
-IMG::IMG(const char* fl){}
-IMG::IMG(){
-    width = 20;
-    height = 20;
-    img_pixels = new int[width*height];
-    for(int i = 0; i<width*height;i++){
-        img_pixels[i] = 0x00;
-    }
-    img_pixels[width*height/2+height/2] = 0x01;
-}
-
-IMG::IMG(int x_core, int y_core): _x_core(x_core), _y_core(y_core){
-    width = 3;
-    height = 3;
-    img_pixels = new int[9] {0,1,0,1,1,1,0,1,0};
-}
-void ImgProc::clearUpdatedImg(){
-    int width = img[1-curImg].width;
-    int height = img[1-curImg].height;
-    memset(&img[1-curImg].img_pixels[0],0x00, width*height*sizeof(int));
-
-}
-
-
-void ImgProc::copyMask(int x_core, int y_core){
-    int cur_update_img = 1 - curImg;
-    for(int y = 0; y < mask.height;y++){
-        for(int x = 0; x < mask.width;x++){
-
+#include <string>
+IMG::IMG(std::string fl){
+    std::ifstream istrm(fl);
+    if (!istrm.is_open())
+        std::cout << "failed to open - " << fl << '\n';
+    else
+    {
+        char temp;
+        istrm>>temp;
+        switch(temp)
+        {
+            case 'p':
+                istrm >> width;
+                istrm >> height;
+                img_pixels = new char[width*height];
+                for(int i =0;i<height;i++){
+                    for(int j = 0; j<width;j++){
+                        istrm>>img_pixels[i*width+j];
+                    }
+                }
+                for(int i = 0; i<height;i++){
+                    for(int j = 0; j<width;j++){
+                        std::cout<<img_pixels[i*width+j];
+                    }
+                    std::cout<<"\n";
+                }
+                break;
+            case 'm':
+                istrm>>x_core;
+                istrm>>y_core;
+                istrm>>core_width;
+                istrm>>core_height;
+                for(int i = 0; i < height;i++){
+                    for(int j = 0; j < width; j++){
+                        istrm>>mask_pixels[i*width+j];
+                    }
+                }
+                break;
         }
     }
-
-
-
-}
-
-
+};
 void ImgProc::dilataion(){
-    clearUpdatedImg();
-    for(int y = 0; y_img ; y++){
-        for(int x = 0; x < img[curImg].width;x++){
-            if(img[curImg].img_pixels[img[curImg].width*y+x]!=1){
-                continue;
-            }
-            copyMask(x,y);
+    IMG picture = IMG("picture.txt");
+    IMG mask = IMG("mask.txt");
+    picture.img_pixels = new char[picture.width * picture.height];
+    for(int i = 0;i<picture.height;i++){
+        if(picture.img_pixels[i] == 0){
+        }
+        else{
 
         }
     }

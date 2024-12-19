@@ -15,8 +15,13 @@ struct temp1{
 };
 
 int main(){
-    temp *a = new temp();
-    temp1 *b = new temp1();
-    std::cout<<sizeof(&a)<<std::endl;
-    std::cout<<sizeof(&b)<<std::endl;
+    std::cout<<sizeof(temp)<<std::endl;
+    std::cout<<sizeof(temp1)<<std::endl;
+    int a = 1;
+    switch(a){
+        case 0:
+            std::cout<<"Zero";
+        case 1:
+            std::cout<<"One";
+    }
 }
