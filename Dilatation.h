@@ -19,18 +19,20 @@ struct IMG{
 };
 class ImgProc{
     private:
-        IMG img[2];
-        int curImg{0};
+        IMG *img;
+        IMG *mask;
         void clearUpdatedImg();
-        void showImg(int img_num);
     public:
+        void copyMask();
+        void showImg();
         ImgProc() {
             int t = 0;
-            while(t++ < img[1].width * img[1].height){
-                img[1].img_pixels[t] = 0x00;
+            while(t++ < img->width * img->height){
+                img->img_pixels[t] = 0x00;
             }
 
         }
+        ImgProc(IMG *picture, IMG *mask);
         ~ImgProc(){}
         void dilataion();
         void update();

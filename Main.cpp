@@ -6,14 +6,9 @@
 #include "Dilatation.h"
 #include <unistd.h>
 int main(){
-    IMG* test;
-    test = new IMG("picture.txt");
-
-
-
-
- //   Train* temp;
- //   temp = new Train(100);
- //   std::cout<<temp->countWagons()<<std::endl;
- //   return 0;
+    IMG* pic = new IMG("picture.txt");
+    IMG* mask = new IMG("mask.txt");
+    //IMG* mask = new IMG("mask.txt");
+    //ImgProc test(pic,mask);
+    //test.showImg();
 }
