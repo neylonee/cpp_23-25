@@ -3,8 +3,9 @@
 #include <fstream>
 #include <string>
 struct IMG{
-    char *img_pixels;
-    char *mask_pixels;
+    int *img_pixels;
+    int *copy_image_pixels;
+    int *mask_pixels;
     unsigned int width;
     unsigned int height;
     unsigned int x_core;
@@ -23,7 +24,6 @@ class ImgProc{
         IMG *mask;
         void clearUpdatedImg();
     public:
-        void copyMask();
         void showImg();
         ImgProc() {
             int t = 0;
@@ -32,8 +32,8 @@ class ImgProc{
             }
 
         }
+
         ImgProc(IMG *picture, IMG *mask);
         ~ImgProc(){}
         void dilataion();
-        void update();
 };

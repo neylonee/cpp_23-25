@@ -10,54 +10,78 @@ IMG::IMG(std::string fl){
     {
         int a;
         istrm >> a;
-        if(int(a) == 1){
+        if(a == 1){
             istrm >> width;
             istrm >> height;
-            img_pixels = new char[width*height];
+            x_core = 0;
+            y_core = 0;
+            core_width = 0;
+            core_height = 0;
+            img_pixels = new int[width*height];
+            copy_image_pixels = new int[width*height];
             for(int i =0;i<height;i++){
                 for(int j = 0; j<width;j++){
                     istrm>>img_pixels[i*width+j];
+                    copy_image_pixels[i*width+j] = img_pixels[i*width+j];
                 }
             }
-            std::cout<<"Картина записана\n";
-            for(int i = 0; i < height; i ++){
-                for(int j = 0; j < width; j++){
-                    std::cout<<img_pixels[i*height + j];
-                }
-                std::cout<<"\n";
-            }
-            istrm.close();
         }
-        std::cout<<"End\n";
+        else{
+            if(a == 0){
+                width = 0;
+                height = 0;
+                istrm >> x_core;
+                istrm >> y_core;
+                istrm >> core_width;
+                istrm >> core_height;
+                mask_pixels = new int[core_width*core_height];
+                for(int i = 0; i < core_height; i++){
+                    for(int j = 0; j < core_width; j++){
+                        istrm >> mask_pixels[i*core_width+j];
+                    }
+                }
+            }
+        }
+        
+        istrm.close();
     }
 };
 
 
 void ImgProc::dilataion(){
-    img->img_pixels = new char[img->width * img->height];
     for(int y = 0;y<img->height;y++){
         for(int x = 0; x < img->width;x++){
-            if(img->img_pixels[img->width*y+x] == 0){
+            if(img->copy_image_pixels[img->width*y+x] == 0){
             }
             else{
-                for(int i = y-mask->y_core; i < mask->height;i++){
-                    for(int j = x - mask->x_core; j < mask->width;j++){
-                        if(img->img_pixels[i*img->height+j] == 0){
-                            img->img_pixels[i*img->height + j] = mask->mask_pixels[i*img->height + j];
+                int tempx = x;
+                int tempy = y;
+                for(int i = 0; i < mask->core_width; i++){
+                    for(int j = 0; j < mask->core_width; j++){
+                        if(img->img_pixels[(tempy-mask->y_core)*img->width+tempx-mask->x_core] == 0){
+                        img->img_pixels[(tempy-mask->y_core)*img->width+tempx-mask->x_core] = mask->mask_pixels[i*mask->core_width+j];
                         }
+                        tempx++;
                     }
+                    tempy++;
+                    tempx = x;
                 }
+
+
             }
         }
     }
 }
 void ImgProc::showImg(){
+    std::cout<<"Вывод картинки: \n\n";
     for(int i = 0; i < img->height; i ++){
         for(int j = 0; j < img->width; j++){
-            std::cout<<img->img_pixels[i*img->height + j];
+            std::cout<<img->img_pixels[i*img->width + j];
         }
+        std::cout<<"\n";
     }
-    std::cout<<"Вывод закончен\n";
+    std::cout<<"\n";
+    std::cout<<"Вывод закончен\n\n";
 }
 ImgProc::ImgProc(IMG *picture, IMG *maska){
     img = picture;
